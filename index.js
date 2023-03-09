@@ -126,11 +126,16 @@ const invokeFunction = (input) => {
 
     return client.send(command)
         .then(output => {
+            const {Payload} = output;
+
+            const formattedPayload = String.fromCharCode.apply(null, Payload);
+        
+            output.Payload = formattedPayload;
+
             logWithSeparator("Successfully invoked lambda function", output);
 
             return output;
         });
-
 };
 
 // ----------
